@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package example.complex;
+
+option go_package = "proto/code-gen/complex";
+
+message Complex {
+  Other other = 1;
+  repeated Other others = 2;
+}
+
+message Other {
+  int32 id = 1;
+  string name = 2;
+}

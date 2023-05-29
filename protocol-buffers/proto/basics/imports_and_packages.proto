@@ -1,0 +1,9 @@
+syntax = "proto3"; // sp3
+
+import "same_level.proto";
+import "nested_level.proto";
+
+message MessageThree {
+  MessageOne one = 1;
+  cool_package.MessageFour f = 2;
+}

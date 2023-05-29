@@ -1,0 +1,13 @@
+syntax = "proto3"; // sp3
+
+enum EnumOne {
+  ENUM_ONE_UNKNOWN = 0;
+}
+message MessageOne { // msg
+  int32 msg = 1;
+}
+
+message MessageTwo { // msg
+  MessageOne one = 1;
+  EnumOne two = 2;
+}

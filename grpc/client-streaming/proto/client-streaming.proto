@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package client.streaming;
+
+option go_package = "grpc/client-streaming";
+
+message StatusRequest{
+  uint32 server_id = 1;
+}
+
+message StatusResponse{
+  string result = 1;
+}
+
+service ClientStreamingService {
+  rpc Status(stream StatusRequest) returns (StatusResponse);
+}
+

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package server.streaming;
+
+option go_package = "grpc/server-streaming";
+
+message LogsRequest{
+  int32 server_id = 1;
+}
+
+message LogsResponse{
+  string database_result = 3;
+}
+
+service ServerStreamingService {
+  rpc Logs(LogsRequest) returns (stream LogsResponse);
+}
+

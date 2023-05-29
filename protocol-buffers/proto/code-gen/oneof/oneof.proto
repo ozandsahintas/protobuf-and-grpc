@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package example.oneof;
+
+option go_package = "proto/code-gen/oneof";
+
+message Result {
+  oneof result {
+    string msg = 1;
+    uint32 id = 2;
+  }
+}

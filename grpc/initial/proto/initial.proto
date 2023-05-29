@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package initial;
+
+option go_package = "grpc/initial";
+
+message InitialRequest{
+  string first_name = 1;
+}
+
+message InitialResponse{
+  string result = 1;
+}
+
+service InitialService {
+  rpc Initial(InitialRequest) returns (InitialResponse);
+}
+

@@ -1,0 +1,15 @@
+syntax = "proto3"; // sp3
+
+package cool_package
+
+message MessageFour { // msg
+  message MessageOne { // msg
+
+  }
+  enum EnumOne {
+    ENUM_ONE_UNKNOWN = 0;
+  }
+
+  MessageOne one = 1;
+  EnumOne two = 2;
+}
