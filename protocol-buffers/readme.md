@@ -128,11 +128,18 @@ message Account {
 Good to have
 =
 - Name of the file should be lowered snake case (test_name).
-- License header above the syntax.
+- Each line 80 chars max.
+- Indentation 2 spaces.
+- Double quotes for strings. ("test-string")
+- License header above the syntax, simple description after, syntax, package, imports and options.
+- Enums, messages and services if any.
 - Imports should be alphabetically.
-- Service, enum, message and rpc names should be camel case (TestName).
-- Enum fields should be upper snake case (TEST_NAME).
+- Service, enum, message and rpc names should be pascal case (TestName).
+- Enum fields should be upper snake case (TEST_NAME). And zero-value enum: XXX_UNSPECIFIED
 - Repeated fields should be plural.
+- Message field names lower snak case (test_field_name).
+- Package names lowercase and no whitespace (test.package).
+- THERE IS ALSO UBER PROTOBUF STYLE
 
 Services
 =
