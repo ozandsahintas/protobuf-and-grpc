@@ -57,7 +57,7 @@ func GetStatus(s uint32) bool {
 	case 0:
 		return true
 	case 1:
-		return true
+		return false
 	case 2:
 		return true
 	}

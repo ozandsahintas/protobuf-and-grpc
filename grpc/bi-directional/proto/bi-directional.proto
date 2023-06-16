@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package bidirectional;
+
+option go_package = "grpc/bi-directional";
+
+message CommRequest{
+  string name = 1;
+}
+
+message CommResponse{
+  int32 id = 1;
+  string result = 2;
+}
+
+service BiDirectionalService {
+  rpc Communication(stream CommRequest) returns (stream CommResponse);
+}
+

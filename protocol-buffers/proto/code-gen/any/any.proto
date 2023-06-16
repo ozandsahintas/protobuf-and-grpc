@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package example.any;
+
+import "google/protobuf/any.proto";
+
+option go_package = "proto/code-gen/any";
+
+message StructOne {
+  string id = 1;
+  int32 number = 2;
+}
+
+message StructTwo {
+  string id = 1;
+  string a_string = 2;
+}
+
+message StructThree {
+  string id = 1;
+  int32 n = 2;
+}
+
+message UseAny {
+  google.protobuf.Any any_field = 1;
+}

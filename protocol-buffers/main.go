@@ -3,12 +3,15 @@ package main
 import (
 	"fmt"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/anypb"
+	any2 "protocol-buffers/proto/code-gen/any"
 	px "protocol-buffers/proto/code-gen/complex"
 	pe "protocol-buffers/proto/code-gen/enum"
 	"protocol-buffers/proto/code-gen/file"
 	pm "protocol-buffers/proto/code-gen/maps"
 	pof "protocol-buffers/proto/code-gen/oneof"
 	ps "protocol-buffers/proto/code-gen/simple"
+	ttt "protocol-buffers/proto/code-gen/test-dir"
 	"reflect"
 )
 
@@ -27,10 +30,14 @@ func main() {
 
 	//doFile(doSimple())
 
-	js := doToJSON(doSimple())
-	m := doFromJSON(js, reflect.TypeOf(ps.Simple{}))
-	fmt.Println(js)
-	fmt.Println(m)
+	//test()
+
+	doAny()
+
+	//js := doToJSON(doSimple())
+	//m := doFromJSON(js, reflect.TypeOf(ps.Simple{}))
+	//fmt.Println(js)
+	//fmt.Println(m)
 
 }
 
@@ -82,6 +89,39 @@ func doMap() *pm.AMap {
 	}}
 }
 
+func test() {
+
+	address := ttt.Address{
+		City: &ttt.City{
+			Name:       "City Name",
+			ZipCode:    "12345",
+			CountyName: "County Name",
+		},
+		Street: &ttt.City_Street{
+			Name: "Street Name",
+			City: &ttt.City{
+				Name:       "",
+				ZipCode:    "",
+				CountyName: "",
+			},
+		},
+		Building: &ttt.City_Street_Building{
+			Name:   "Building Name",
+			Number: 123,
+			Street: &ttt.City_Street{
+				Name: "Street Name",
+				City: &ttt.City{
+					Name:       "City Name",
+					ZipCode:    "12345",
+					CountyName: "County Name",
+				},
+			},
+		},
+	}
+
+	fmt.Println(doToJSON(&address))
+}
+
 func doFile(p proto.Message) {
 	path := "proto/code-gen/file/simple.bin"
 
@@ -89,6 +129,32 @@ func doFile(p proto.Message) {
 	msg := &ps.Simple{}
 	file.ReadFile(path, msg)
 	fmt.Println(msg)
+}
+
+func doAny() {
+	var a anypb.Any
+
+	anypb.MarshalFrom(&a, &any2.StructOne{
+		Id:     "Id",
+		Number: 1,
+	}, proto.MarshalOptions{})
+
+	fmt.Println(&a)
+
+	s3 := &any2.StructOne{}
+	if err := a.UnmarshalTo(s3); err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(s3)
+
+	anypb.MarshalFrom(&a, &any2.StructTwo{
+		Id:      "NewId",
+		AString: "A String",
+	}, proto.MarshalOptions{})
+
+	fmt.Println(&a)
+
 }
 
 func doToJSON(p proto.Message) string {
