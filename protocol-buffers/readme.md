@@ -113,6 +113,7 @@ sfixed64
 - No ordering.
 
 <h4>Timestamp and Duration</h4>
+
 ```protobuf
 syntax = "proto3";
 
@@ -143,8 +144,8 @@ Good to have
 
 Services
 =
-```protobuf
 
+```protobuf
 // Not designed for serialization and deserialization.
 // It is designed for communication.
 // Main framework for communication is gRPC.
